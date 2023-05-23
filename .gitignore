@@ -1,0 +1,10 @@
+# Folders
+.vscode/
+mains/
+
+# Ignorar los ejecutables
+*exe*
+
+# Ignora funcion para imprimir
+print_array.c
+print_list.c
