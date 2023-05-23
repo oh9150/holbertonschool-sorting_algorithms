@@ -24,6 +24,9 @@ void print_array(const int *array, size_t size);
 /*Prints a list of integers*/
 void print_list(const listint_t *list);
 
+/*General*/
+void swap(int *a, int *b);
+
 /*Mandatory*/
 /*0. function that sorts an array of integers in ascending order using the Bubble sort algorithm*/
 void bubble_sort(int *array, size_t size);
