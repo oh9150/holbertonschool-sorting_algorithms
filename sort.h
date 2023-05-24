@@ -51,7 +51,8 @@ void selection_sort(int *array, size_t size);
  * Quick sort algorithm
  */
 void quick_sort(int *array, size_t size);
-
+void quick_sort_recursive(int *array, int, int);
+int partition(int *array, int, int);
 
 /*Advanced*/
 /*
