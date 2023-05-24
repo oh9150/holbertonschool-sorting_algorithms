@@ -69,6 +69,6 @@ void swap(int *a, int *b)
 		return;
 	
 	tmp = *a;
-	*b = *a;
-	*a = tmp;
+	*a = *b;
+	*b = tmp;
 }
