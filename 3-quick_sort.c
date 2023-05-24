@@ -10,23 +10,23 @@ void quick_sort(int *array, size_t size)
 {
 		int low = 0, high = size - 1;
 
-		quick_sort_recursive(array, low, high);
+		quick_sort_recursive(array, low, high, size);
 }
 /**
  * quick_sort_recursive - recursive function for quick sort algorithm
  * @low: the bottom of the array
  * @high: the top of the array
  */
-void quick_sort_recursive(int *array, int high, int low)
+void quick_sort_recursive(int *array, int high, int low, size_t size)
 {
 	int pi;
 
 	if (low < high)
 	{
-		pi = partition(array, low, high);
+		pi = partition(array, low, high, size);
 
-		quick_sort_recursive(array, low, pi - 1);
-		quick_sort_recursive(array, pi + 1, high);
+		quick_sort_recursive(array, low, pi - 1, size);
+		quick_sort_recursive(array, pi + 1, high, size);
 	}
 }
 /**
@@ -37,7 +37,7 @@ void quick_sort_recursive(int *array, int high, int low)
  * @low: the bottom of the array
  * @high: the top of the array
  */
-int partition(int *array, int high, int low)
+int partition(int *array, int high, int low, size_t size)
 {
 	int pivot = array[high], i = (low - 1), j;
 
@@ -47,11 +47,11 @@ int partition(int *array, int high, int low)
 		{
 			i++;
 			swap(&array[i], &array[j]);
-			print_array(array, sizeof(array) / sizeof(array[0]));
+			print_array(array, size);
 		}
 	}
 	swap(&array[i + 1], &array[high]);
-	print_array(array, sizeof(array) / sizeof(array[0]));
+	print_array(array, size);
 
 	return (i + 1);
 }
