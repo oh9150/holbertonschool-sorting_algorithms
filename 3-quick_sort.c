@@ -62,13 +62,13 @@ void quick_sort_recursive(int *array, int low, int high, size_t size)
  * @high: the top of the array
  * @size: the size of the array
  */
-int partition(int *array, int high, int low, size_t size)
+int partition(int *array, int low, int high, size_t size)
 {
 	int pivot = array[high], i = (low - 1), j;
 
-	for (j = low; j < high; j++)
+	for (j = low; j <= high - 1; j++)
 	{
-		if (array[j] <= pivot)
+		if (array[j] < pivot)
 		{
 			i++;
 			swap(&array[i], &array[j]);
