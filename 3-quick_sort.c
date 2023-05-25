@@ -7,14 +7,14 @@
  */
 void swap(int *a, int *b)
 {
-        int tmp;
+	int tmp;
 
-        if (!a || !b)
-                return;
+	if (!a || !b)
+		return;
 
-        tmp = *a;
-        *a = *b;
-        *b = tmp;
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
 /**
@@ -37,6 +37,7 @@ void quick_sort(int *array, size_t size)
  * quick_sort_recursive - recursive function for quick sort algorithm
  * @low: the bottom of the array
  * @high: the top of the array
+ * @size: the size of the array
  */
 void quick_sort_recursive(int *array, int high, int low, size_t size)
 {
@@ -58,12 +59,13 @@ void quick_sort_recursive(int *array, int high, int low, size_t size)
  * @array: the array
  * @low: the bottom of the array
  * @high: the top of the array
+ * @size: the size of the array
  */
 int partition(int *array, int high, int low, size_t size)
 {
 	int pivot = array[high], i = (low - 1), j;
 
-	for (j = low; j <= high; j++)
+	for (j = low; j < high; j++)
 	{
 		if (array[j] <= pivot)
 		{
