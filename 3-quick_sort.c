@@ -1,6 +1,23 @@
 #include "sort.h"
 
 /**
+ * swap - swaps two elements's value
+ * @a: int #1
+ * @b: int #2
+ */
+void swap(int *a, int *b)
+{
+        int tmp;
+
+        if (!a || !b)
+                return;
+
+        tmp = *a;
+        *a = *b;
+        *b = tmp;
+}
+
+/**
  * quick_sort - sorts @array using the quick sort algorithm with the "Lomuto"
  * partition
  * @array: the the array
@@ -15,6 +32,7 @@ void quick_sort(int *array, size_t size)
 
 		quick_sort_recursive(array, low, high, size);
 }
+
 /**
  * quick_sort_recursive - recursive function for quick sort algorithm
  * @low: the bottom of the array
@@ -32,6 +50,7 @@ void quick_sort_recursive(int *array, int high, int low, size_t size)
 		quick_sort_recursive(array, pi + 1, high, size);
 	}
 }
+
 /**
  * partition - takes the last element as pivot, places it in the correct
  * position and places all smaller elements to the left of the pivot and all
@@ -52,26 +71,10 @@ int partition(int *array, int high, int low, size_t size)
 			swap(&array[i], &array[j]);
 			print_array(array, size);
 		}
+	}
 
 	swap(&array[i + 1], &array[high]);
 	print_array(array, size);
 
 	return (i + 1);
-}
-
-/**
- * swap - swaps two elements's value
- * @a: int #1
- * @b: int #2
- */
-void swap(int *a, int *b)
-{
-	int tmp;
-
-	if (!a || !b)
-		return;
-	
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
 }
