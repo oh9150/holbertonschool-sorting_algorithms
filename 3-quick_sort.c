@@ -39,10 +39,11 @@ void quick_sort(int *array, size_t size)
  * @high: the top of the array
  * @size: the size of the array
  */
-void quick_sort_recursive(int *array, int high, int low, size_t size)
+void quick_sort_recursive(int *array, int low, int high, size_t size)
 {
 	int pi;
 
+	
 	if (low < high)
 	{
 		pi = partition(array, low, high, size);
