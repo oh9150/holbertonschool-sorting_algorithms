@@ -8,7 +8,7 @@
  */
 void shell_sort(int *array, size_t size)
 {
-	size_t arr_size, i, n = 0;
+	size_t i, n = 0;
 
 	if (!array)
 		return;
@@ -21,8 +21,7 @@ void shell_sort(int *array, size_t size)
 			if (array[i - n] > array[i])
 				swap(&array[i - n], &array[i]);
 		}
-		arr_size = sizeof(array) / sizeof(array[0]);
-		print_array(array, arr_size);
+		print_array(array, size);
 	}
 }
 
