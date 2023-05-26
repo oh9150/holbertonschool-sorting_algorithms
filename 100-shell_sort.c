@@ -19,11 +19,9 @@ void shell_sort(int *array, size_t size)
 		for (i = n; i < size; i++)
 		{
 			if (array[i - n] > array[i])
-			{
 				swap(&array[i - n], &array[i]);
-				print_array(array, size);
-			}
 		}
+		print_array(array, sizeof(array) / sizeof(array[0]));
 	}
 }
 
