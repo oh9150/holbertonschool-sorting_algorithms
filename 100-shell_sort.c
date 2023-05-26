@@ -15,13 +15,11 @@ void shell_sort(int *array, size_t size)
 
 	for (; n < size; n = n * 3 + 1)
 	{
-		printf("n = %d\n", n);
 
 		for (i = n; i < size; i++)
 		{
 			if (array[i - n] > array[i])
 			{
-				printf("swapping %d and %d\n", array[i - n], array[i]);
 				swap(&array[i - n], &array[i]);
 				print_array(array, size);
 			}
