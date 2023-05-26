@@ -5,6 +5,9 @@ mains/
 # Ignorar los ejecutables
 *exe*
 
+# Ignorar los mains de ejemplo
+*main*
+
 # Ignora funcion para imprimir
 print_array.c
 print_list.c
