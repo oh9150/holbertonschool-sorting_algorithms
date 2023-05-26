@@ -16,10 +16,10 @@ void shell_sort(int *array, size_t size)
 	for (; n < size; n = n * 3 + 1)
 	{
 
-		for (i = n; i < size; i++)
+		for (i = n - 1; i < size; i++)
 		{
-			if (array[i - n] > array[i])
-				swap(&array[i - n], &array[i]);
+			if (array[i - n - 1] > array[i])
+				swap(&array[i - n - 1], &array[i]);
 		}
 		print_array(array, size);
 	}
