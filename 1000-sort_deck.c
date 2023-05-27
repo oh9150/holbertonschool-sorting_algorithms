@@ -1,68 +1,131 @@
 #include "deck.h"
-
 /**
- * swap_nodes - Swaps two nodes in a doubly linked list
- * @deck: Pointer to the head of the doubly linked list
- * @node1: First node to swap
- * @node2: Second node to swap
- */
-void swap_nodes(deck_node_t **deck, deck_node_t *node1, deck_node_t *node2)
+ * aux_num_fun - turn into integer card value
+ * @head_tmp1: pointer to the list
+ * Return: integer rep
+ **/
+int aux_num_fun(deck_node_t *head_tmp1)
 {
-	if (node1->prev)
-		node1->prev->next = node2;
-	if (node2->next)
-		node2->next->prev = node1;
-	node1->next = node2->next;
-	node2->prev = node1->prev;
-	node1->prev = node2;
-	node2->next = node1;
-	if (!node2->prev)
-		*deck = node2;
-}
+	int aux_num, j;
+	int num[13] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+	char val[13] = {'A', '2', '3', '4', '5', '6', '7',
+		'8', '9', '1', 'J', 'Q', 'K'};
 
+	for (j = 0; j < 13; j++)
+	{
+		if (head_tmp1->card->value[0] == val[j])
+			aux_num = num[j];
+	}
+
+	return (aux_num);
+}
 /**
- * sort_deck - Sorts a deck of cards in ascending order
- * @deck: Double pointer to the head of the deck
- */
+ * num_sort - sorts a doubly linked list of integers, 4 stages
+ * @list: pointer to the list head
+ * Return: no return
+ **/
+void num_sort(deck_node_t **list)
+{
+	deck_node_t *head_tmp1, *head_tmp2, *aux1, *aux2;
+	int flag = 0, i, aux_num1, aux_num2;
+	unsigned int k;
+
+	head_tmp1 = *list;
+	head_tmp2 = *list;
+	for (i = 0; i < 4; i++)
+	{ k =  head_tmp1->card->kind;
+		while (head_tmp1->next && head_tmp1->next->card->kind == k)
+		{
+			aux_num1 = aux_num_fun(head_tmp1);
+			aux_num2 = aux_num_fun(head_tmp1->next);
+			flag = 0;
+			head_tmp2 = head_tmp1;
+			while (head_tmp2 && head_tmp2->card->kind == k && aux_num1 > aux_num2)
+			{
+				aux1 = head_tmp2;
+				aux2 = head_tmp2->next;
+				aux1->next = aux2->next;
+				if (aux2->next)
+					aux2->next->prev = aux1;
+				aux2->prev = aux1->prev;
+				aux2->next = aux1;
+				aux1->prev = aux2;
+				if (aux2->prev)
+					aux2->prev->next = aux2;
+				head_tmp2 = aux2->prev;
+				if (!aux2->prev)
+					*list = aux2;
+				flag = 1;
+				if (!head_tmp2)
+					break;
+				aux_num1 = aux_num_fun(head_tmp2);
+				aux_num2 = aux_num_fun(head_tmp2->next);
+			}
+			if (flag == 0)
+				head_tmp1 = head_tmp1->next;
+		}
+		head_tmp1 = head_tmp1->next;
+	}
+}
+/**
+ * kind_sort - sorts a doubly linked list of integers
+ * in ascending order using the Insertion sort ailgorithm
+ * @list: pointer to the list head
+ * Return: no return
+ **/
+void kind_sort(deck_node_t **list)
+{
+	deck_node_t *head_tmp1, *head_tmp2, *aux1, *aux2;
+	int flag;
+
+	if (list)
+	{
+		head_tmp1 = *list;
+		head_tmp2 = *list;
+		while (list && head_tmp1->next)
+		{
+			if (head_tmp1->next)
+			{
+				flag = 0;
+				head_tmp2 = head_tmp1;
+				while (head_tmp2 && head_tmp2->card->kind > head_tmp2->next->card->kind)
+				{
+					aux1 = head_tmp2;
+					aux2 = head_tmp2->next;
+					aux1->next = aux2->next;
+					if (aux2->next)
+						aux2->next->prev = aux1;
+					if (aux2)
+					{
+						aux2->prev = aux1->prev;
+						aux2->next = aux1;
+					}
+					if (aux1)
+						aux1->prev = aux2;
+					if (aux2->prev)
+						aux2->prev->next = aux2;
+					head_tmp2 = aux2->prev;
+					if (!aux2->prev)
+						*list = aux2;
+					flag = 1;
+				}
+			}
+			if (flag == 0)
+				head_tmp1 = head_tmp1->next;
+		}
+	}
+}
+/**
+ * sort_deck - sorts a deck of cards
+ * @deck: ponter to the deck
+ * Return: no return
+ *
+ **/
 void sort_deck(deck_node_t **deck)
 {
-	deck_node_t *curr, *tmp;
-
-	if (deck == NULL || *deck == NULL)
-		return;
-	curr = *deck;
-	while (curr != NULL)
+	if (deck)
 	{
-		deck_node_t *smallest = curr;
-		deck_node_t *next = curr->next;
-
-		while (next != NULL)
-		{
-			if (next->card->kind < smallest->card->kind ||
-				(next->card->kind == smallest->card->kind &&
-				strcmp(next->card->value, smallest->card->value) < 0))
-				smallest = next;
-			next = next->next;
-		}
-		if (smallest != curr)
-		{
-			if (curr->prev != NULL)
-				curr->prev->next = smallest;
-			if (smallest->prev != NULL)
-				smallest->prev->next = curr;
-
-			tmp = curr->prev;
-
-			curr->prev = smallest->prev;
-			smallest->prev = tmp;
-			tmp = curr->next;
-			curr->next = smallest->next;
-			smallest->next = tmp;
-			if (curr->prev == NULL)
-				*deck = curr;
-			if (smallest->prev == NULL)
-				*deck = smallest;
-		}
-		curr = curr->next;
+		kind_sort(deck);
+		num_sort(deck);
 	}
 }
