@@ -103,4 +103,7 @@ void bitonic_sort(int *array, size_t size);
  */
 void quick_sort_hoare(int *array, size_t size);
 
+/*Others*/
+int get_max(int *array, size_t size);
+
 #endif
