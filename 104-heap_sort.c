@@ -53,13 +53,15 @@ void sift_down(int *array, size_t size, size_t start, size_t end)
  */
 void heap_sort(int *array, size_t size)
 {
+	int i;
+	
 	if (array == NULL || size < 2)
 		return;
 
-	for (int i = size / 2 - 1; i >= 0; i--)
+	for (i = size / 2 - 1; i >= 0; i--)
 		sift_down(array, size, i, size - 1);
 
-	for (int i = size - 1; i > 0; i--)
+	for (i = size - 1; i > 0; i--)
 	{
 		swap(&array[0], &array[i]);
 		print_array(array, size);
