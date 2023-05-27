@@ -26,10 +26,11 @@ void swap_nodes(deck_node_t **deck, deck_node_t *node1, deck_node_t *node2)
  */
 void sort_deck(deck_node_t **deck)
 {
+	deck_node_t *curr;
+
 	if (deck == NULL || *deck == NULL)
 		return;
-	deck_node_t *curr = *deck;
-
+	curr = *deck;
 	while (curr != NULL)
 	{
 		deck_node_t *smallest = curr;
@@ -40,9 +41,7 @@ void sort_deck(deck_node_t **deck)
 			if (next->card->kind < smallest->card->kind ||
 				(next->card->kind == smallest->card->kind &&
 				strcmp(next->card->value, smallest->card->value) < 0))
-			{
 				smallest = next;
-			}
 			next = next->next;
 		}
 		if (smallest != curr)
