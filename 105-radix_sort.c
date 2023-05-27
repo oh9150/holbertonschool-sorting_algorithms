@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "sort.h"
 
 /**
@@ -12,6 +10,7 @@ void radix_sort(int *array, size_t size)
 {
 	int max, exp;
 	int *count, *output;
+	int last_step = 0;  /* Variable de control para el último paso */
 
 	max = get_max(array, size);
 	count = malloc(sizeof(int) * 10);
@@ -45,11 +44,18 @@ void radix_sort(int *array, size_t size)
 		for (i = 0; i < (int)size; i++)
 			array[i] = output[i];
 
-		print_array(array, size);
+		if (exp != 1)  /* Si no es el último paso, imprimir el array */
+			print_array(array, size);
+
+		if (exp * 10 > max)  /* Último paso, actualizar variable de control */
+			last_step = 1;
 	}
 
 	free(count);
 	free(output);
+
+	if (!last_step)  /* Si no es el último paso, imprimir el array */
+		print_array(array, size);
 }
 
 /**
