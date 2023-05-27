@@ -26,7 +26,7 @@ void swap_nodes(deck_node_t **deck, deck_node_t *node1, deck_node_t *node2)
  */
 void sort_deck(deck_node_t **deck)
 {
-	deck_node_t *curr;
+	deck_node_t *curr, *tmp;
 
 	if (deck == NULL || *deck == NULL)
 		return;
@@ -51,7 +51,7 @@ void sort_deck(deck_node_t **deck)
 			if (smallest->prev != NULL)
 				smallest->prev->next = curr;
 
-			deck_node_t *tmp = curr->prev;
+			tmp = curr->prev;
 
 			curr->prev = smallest->prev;
 			smallest->prev = tmp;
